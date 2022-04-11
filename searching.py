@@ -39,6 +39,16 @@ def pattern_search(seq, vzor):
     mnozina = set()
     j = 0
     for i in range(0, len(seq)):
+        idx = 0
+        for letter in seq[i:i + len(vzor)]:
+            if letter != vzor[idx]:
+                break
+            else:
+                idx += 1
+
+        if idx == len(vzor):
+            mnozina.add(j)
+
         if seq[i:i + len(vzor)] == vzor:
             mnozina.add(j)
         j += 1
