@@ -35,14 +35,31 @@ def linear_search(seq, num):
 
 
 
+def pattern_search(seq, vzor):
+    mnozina = set()
+    j = 0
+    for i in range(0, len(seq)):
+        if seq[i:i + len(vzor)] == vzor:
+            mnozina.add(j)
+        j += 1
+    return mnozina
+
+
+
 
 
 def main():
     seq_data = read_data("sequential.json", "unordered_numbers")
     print(seq_data)
 
-    dict = linear_search(seq_data, 0)
+    dict = linear_search(seq_data, 9)
     print(dict)
+
+    dna = read_data("sequential.json", "dna_sequence")
+    print(dna)
+    mnozka = pattern_search(dna, "ATA")
+    print(mnozka)
+
 
 
 if __name__ == '__main__':
