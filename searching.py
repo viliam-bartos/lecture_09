@@ -1,6 +1,10 @@
 import os
 import json
 
+#fork z githubu, naklonovat, jít do složky s ukolem, git remote add upstream "url toho forknuteho ukolu", git branch "jmeno"
+#git checkout "jmeno vetve"
+#zkontrolovat git remote -v
+
 # get current working directory path
 cwd_path = os.getcwd()
 
@@ -35,7 +39,7 @@ def linear_search(seq, num):
 
 
 
-def pattern_search(seq, vzor):
+def pattern_search(seq, vzor):      #do sebe vnořené cykly se mezi sebou násobí takže nejhorší scénář O = n*n
     mnozina = set()
     j = 0
     for i in range(0, len(seq)):
@@ -48,11 +52,41 @@ def pattern_search(seq, vzor):
 
         if idx == len(vzor):
             mnozina.add(j)
-
+        """
         if seq[i:i + len(vzor)] == vzor:
             mnozina.add(j)
+        """
         j += 1
     return mnozina
+
+
+
+def binary_search(seq, num):
+    """
+    while True:
+        if seq[int((len(seq) - 1) / 2)] == num:
+            return int((len(seq) - 1) / 2)
+        elif seq[int((len(seq) - 1) / 2)] > num:
+            seq = seq[:int((len(seq) - 1) / 2)]
+        elif seq[int((len(seq) - 1) / 2)] < num:
+            seq = seq[int((len(seq) - 1) / 2):]
+    """
+    left = 0
+    right = len(seq) - 1
+    while left < right:
+        middle = (left + right) // 2
+        if seq[middle] == num:
+            return middle
+        elif seq[middle] < num:
+            left = middle + 1
+        elif seq[middle] > num:
+            right = middle - 1
+    return None
+
+
+
+
+
 
 
 
@@ -69,6 +103,12 @@ def main():
     print(dna)
     mnozka = pattern_search(dna, "ATA")
     print(mnozka)
+
+    serazene = read_data("sequential.json", "ordered_numbers")
+    print(serazene)
+    cislo = binary_search(serazene, 8)
+    print(cislo)
+
 
 
 
